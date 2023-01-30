@@ -135,6 +135,8 @@
             <label for="inputState" class="form-label">Amount</label>
             <input type="text" name="amount" class="form-control" placeholder="Enter Phone Number" autocomplete="off" id="edit_amount">
           </div>
+          sdfsdfsad
+          <fieldset></fieldset>
           <div class="col-md-12">
             <label for="inputState" class="form-label">Interest Rate</label>
             <input type="text" name="rate" class="form-control" placeholder="Enter Interest Rate" autocomplete="off" id="edit_interest">
