@@ -3,8 +3,7 @@ include 'dbcon.php';
 //include 'includes/header.php';
 ## Read value
 $column = array(
-    'id','idno','names','unit','function','tel','capita','number'
-);
+    'id','names','phone','tin','address');
 
 $draw = $_POST['draw'];
 $row = $_POST['start'];
@@ -17,7 +16,7 @@ $searchValue = mysqli_real_escape_string($con,$_POST['search']['value']); // Sea
 ## Search 
 $searchQuery = " ";
 if($searchValue != ''){
-	$searchQuery = " and (names like '%".$searchValue."%' or idcard like '%".$searchValue."%' or phone like '%".$searchValue."%' ) ";
+	$searchQuery = " and (names like '%".$searchValue."%' or tin like '%".$searchValue."%' or phone like '%".$searchValue."%' ) ";
 }
 
 ## Total number of records without filtering
@@ -49,9 +48,10 @@ while ($row = mysqli_fetch_array($empRecords)) {
     		
 			"id"=>$i,
     		"names"=>$row['names'],
-			"idno"=>$row['idcard'],
+			"tin"=>$row['tin'],
     	
 			"phone"=>$row['phone'],
+           
             "action1" => $action1,
 			"action2" => $action2,
 			 

@@ -42,6 +42,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 
 <script>
@@ -103,23 +104,23 @@
                         }
                         ?>
                         <div class="card-body">
-                            <h5 class="card-title">Members Management</h5>
+                            <h5 class="card-title">Setting Prices</h5>
                             <!-- Basic Modal -->
                             <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat" id="addproduct"><i class="fa fa-plus"></i> Add New</a>
 
                             </button>
                             <?php
-                            include('includes/member_modal.php');
+                            include('includes/price_modal.php');
                             ?>
                             <table id="customer_data" class="table table-bordered table-striped">
                                 <thead>
                                     <th>No #</th>
-                                    <th>IdNo</th>
-                                    <th>Names</th>
-
-                                    <th>Phone</th>
+                                    <th>Item</th>
+                                    <th>Purchasing Price</th>
+                                    <th>Selling Price</th>
                                     <th></th>
                                     <th></th>
+                              
                                 </thead>
 
                             </table>
@@ -134,28 +135,29 @@
                                         'destroy': true,
                                         'serverMethod': 'post',
                                         'ajax': {
-                                            'url': 'memberajax.php'
+                                            'url': 'priceajax.php'
                                         },
                                         'columns': [{
                                                 data: 'id'
                                             },
-
                                             {
-                                                data: 'idno'
+                                                data: 'item'
                                             },
                                             {
-                                                data: 'names'
-                                            },
-
-                                            {
-                                                data: 'phone'
+                                                data: 'pprice'
                                             },
                                             {
-                                                data: 'action1'
+                                                data: 'sprice'
                                             },
                                             {
-                                                data: 'action2'
+                                                data: 'button1'
                                             },
+                                            {
+                                                data: 'button2'
+                                            }
+                                           
+                                            
+                                            
                                         ],
                                         dom: 'lBfrtip',
                                         buttons: [
@@ -196,7 +198,7 @@
                                 function getRow(id) {
                                     $.ajax({
                                         type: 'POST',
-                                        url: 'client_row.php',
+                                        url: 'price_row.php',
                                         data: {
                                             id: id
                                         },
@@ -204,11 +206,9 @@
                                         success: function(response) {
                                             $('#edit_id1').val(response.id);
                                             $('#edit_id').val(response.id);
-                                          
-                                            $('#edit_names').val(response.names);
-                                            $('#edit_idno').val(response.idcard);
-                                           
-                                            $('#edit_tel').val(response.phone);
+                                            $('#edit_item').val(response.item);
+                                            $('#edit_pprice').val(response.pprice);
+                                            $('#edit_sprice').val(response.sprice);
                                          
                                         }
                                     });
@@ -240,6 +240,57 @@
     <!-- Footer -->
     <?php include("footer.php"); ?>
     <!-- End Footer -->
+    <script>
+    function getData(el) {
+		if (el.value == "") {
+			//document.getElementById(type).innerHTML = "<option></option>";
+			return;
+		} else { 
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var parentRow = el.parentElement.parentElement;
+					var inStock = parentRow.getElementsByClassName('in-stock')[0];
+
+					var data = JSON.parse(this.responseText);
+
+					inStock.value = data.qty;
+					
+				}
+			};
+			xmlhttp.open("GET","ajaxstockrawmaterial.php?q="+el.value, true);
+			xmlhttp.send();
+		}
+	}
+
+    function setTotalPrice(el) {
+		var qty = el.value;
+		var parentRow = el.parentElement.parentElement;
+		var tbody = parentRow.parentElement;
+
+		var inStock = parentRow.getElementsByClassName('in-stock')[0];
+		
+			if (validateQty(qty,inStock.value)) {
+				
+				alert('The entered quantity is exceeding the quantity in stock');
+				el.value = qty.slice(0, qty.length - 1);
+			}
+		}
+	
+	
+    function validateQty(stockQty, qty) {
+		return Number(stockQty) > Number(qty);
+	}
+
+    </script>
+
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
@@ -254,7 +305,6 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
 
 </body>
 

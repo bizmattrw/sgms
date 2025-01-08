@@ -25,11 +25,15 @@
         input {
             border: none;
             border-bottom: 2px solid teal;
-            /* border-radius: 20px; */
             width: 100%;
             padding: 12px 0px;
             outline: none;
             font-size: 18px;
+        }
+
+        input:focus {
+            border-color: teal;
+            outline: none;
         }
 
         button {
@@ -41,7 +45,6 @@
             font-size: 18px;
             border-radius: 14px;
             cursor: pointer;
-
         }
 
         #container {
@@ -61,7 +64,6 @@
             color: white;
             padding: 38px 20px;
             border-radius: 60px;
-
         }
 
         h3 {
@@ -69,8 +71,13 @@
         }
 
         footer {
-            height: 100px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: teal;
+            color: white;
             text-align: center;
+            padding: 20px;
         }
 
         body {
@@ -87,22 +94,33 @@
         <legend><b>SGMS</b></legend>
         <form role="form" method="POST" action="loginprocess.php">
             <p>
-            <h3>Username</h3>
-            <input type="text" placeholder="Username" autofocus required title="Username" name=username >
+                <label for="username"><h3>Username</h3></label>
+                <input type="text" id="username" placeholder="Username" autofocus required title="Username" name="username" minlength="4" maxlength="20">
             </p>
             <p>
-            <h3>Password</h3>
-            <input type="password" placeholder="Password" required title="Password" name=password>
+                <label for="password"><h3>Password</h3></label>
+                <input type="password" id="password" placeholder="Password" required title="Password" name="password">
+                <input type="checkbox" onclick="togglePassword()"> Show Password
             </p>
             <p id="container">
-                <button type="submit" name="save">Login</button>
+                <button type="submit">Login</button>
             </p>
         </form>
     </fieldset>
 
     <footer>
-        <h3>Powered By Mathias Tel: 0783315134</h3>
+        <h3>Powered By Mathias</h3>
     </footer>
+    <script>
+        function togglePassword() {
+            var password = document.getElementById("password");
+            if (password.type === "password") {
+                password.type = "text";
+            } else {
+                password.type = "password";
+            }
+        }
+    </script>
     <script src="//code.tidio.co/sn8lx7modbgnihs5wxsbdmkhktqgshmz.js" async></script>
 </body>
 

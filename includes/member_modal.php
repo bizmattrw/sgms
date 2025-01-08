@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Member Entry</h5>
+        <h5 class="modal-title">Company Entry</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -10,18 +10,19 @@
         <form class="row g-3" action="saveformattive.php" method="POST" id="save_member">
 
 
-          <div class="col-md-6"> <label for="inputCity" class="form-label">Names</label>
+          <div class="col-md-6"> <label for="inputCity" class="form-label">Compnay</label>
 
-            <input type="text" name="names" class="form-control" placeholder="Enter Fulname" autocomplete="off">
+            <input type="text" name="names" class="form-control" placeholder="Enter Company Name" autocomplete="off">
           </div>
           <div class="col-md-6">
-            <label for="inputState" class="form-label">IdNo</label>
-            <input type="text" name="idcard" class="form-control" placeholder="Enter IdNo" autocomplete="off">
+            <label for="inputState" class="form-label">Tin No</label>
+            <input type="text" name="idcard" class="form-control" placeholder="Enter Tin No" autocomplete="off">
           </div>
           <div class="col-md-12">
             <label for="inputState" class="form-label">Phone</label>
             <input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" autocomplete="off">
           </div>
+        
           <button type="submit" class="btn btn-primary" name="save">Save </button>
         </form>
         <div class="modal-footer">
@@ -68,7 +69,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Member Edit</h5>
+        <h5 class="modal-title">Customer Edit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -81,7 +82,7 @@
             <input type="text" name="names" class="form-control" placeholder="Enter Fulname" autocomplete="off" id="edit_names">
           </div>
           <div class="col-md-6">
-            <label for="inputState" class="form-label">IdNo</label>
+            <label for="inputState" class="form-label">Tin No</label>
             <input type="text" name="idcard" class="form-control" placeholder="Enter IdNo" autocomplete="off" id="edit_idno">
           </div>
           <div class="col-md-12">

@@ -10,10 +10,10 @@ $names=mysqli_real_escape_string($con,$_POST['names']);
 $phone=$_POST['phone'];
 $idcard = $_POST['idcard'];
 
-$k=mysqli_query($con,"SELECT * FROM members WHERE idcard='$idcard'");
+$k=mysqli_query($con,"SELECT * FROM members WHERE tin='$idcard'");
   if(mysqli_num_rows($k)<=0)
 {
-$in=mysqli_query($con,"INSERT INTO members (id, names,idcard,phone) VALUES(NULL,'$names','$idcard','$phone')")or die(mysqli_error($con))or die(mysqli_error($con));
+$in=mysqli_query($con,"INSERT INTO members (id, names,tin,phone) VALUES(NULL,'$names','$idcard','$phone')")or die(mysqli_error($con))or die(mysqli_error($con));
 //mysqli_error($con);
        
 $_SESSION['message']="Data Saved successfully";

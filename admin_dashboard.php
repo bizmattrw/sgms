@@ -43,7 +43,7 @@ include("includes/session.php");
 <body>
 
     <!-- ======= Header ======= -->
-    <?php include("topbar.php"); ?>
+    <?php include("top.php"); ?>
     <!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
@@ -75,19 +75,19 @@ include("includes/session.php");
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Savings <span>| Today</span></h5>
+                                    <h5 class="card-title">ENTRIES <span>| </span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-cart"></i>
+                                            <i class="bi bi-yelp"></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6><?php
                                                 include('dbcon.php');
-                                                $selQuery = mysqli_query($con, "SELECT sum(saving) as amount from saving");
+                                                $selQuery = mysqli_query($con, "SELECT count(rawmaterial) as amount from rawmaterialentry");
                                                 $row = mysqli_fetch_array($selQuery);
                                                 $amount = $row['amount'];
-                                                echo "$amount \Rwf";
+                                                echo "$amount ";
                                                 ?></h6>
                                             <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
 
@@ -104,7 +104,7 @@ include("includes/session.php");
                             <div class="card info-card revenue-card">
 
                                 <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-backpack2"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                         <li class="dropdown-header text-start">
                                             <h6>Filter</h6>
@@ -114,18 +114,18 @@ include("includes/session.php");
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Credits <span>| Today</span></h5>
+                                    <h5 class="card-title">EXITS <span>| </span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-currency-dollar"></i>
+                                            <i class="bi bi-yin-yang"></i>
                                         </div>
                                         <div class="ps-3">
                                             <h6><?php
-                                                $selQuery = mysqli_query($con, "SELECT sum(amount) as amount from credits");
+                                                $selQuery = mysqli_query($con, "SELECT count(rawmaterial) as amount from rawmaterialexit");
                                                 $row = mysqli_fetch_array($selQuery);
                                                 $amount = $row['amount'];
-                                                echo "$amount \Rwf";
+                                                echo "$amount ";
                                                 ?>
                                             </h6>
                                             <span class="text-success small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
@@ -139,7 +139,7 @@ include("includes/session.php");
                         <!-- End Revenue Card -->
 
                         <!-- Customers Card -->
-                        <div class="col-xxl-4 col-xl-12">
+                        <div class="col-xxl-4 col-xl-6">
 
                             <div class="card info-card customers-card">
 
@@ -155,7 +155,7 @@ include("includes/session.php");
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Members <span>| Today</span></h5>
+                                    <h5 class="card-title">Users <span>| </span></h5>
 
                                     <div class="d-flex align-items-center">
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -163,7 +163,7 @@ include("includes/session.php");
                                         </div>
                                         <div class="ps-3">
                                             <h6> <?php
-                                                    $selQuery = mysqli_query($con, "SELECT count(*) as amount from members");
+                                                    $selQuery = mysqli_query($con, "SELECT count(*) as amount from users");
                                                     $row = mysqli_fetch_array($selQuery);
                                                     $amount = $row['amount'];
                                                     echo "$amount";
@@ -174,12 +174,55 @@ include("includes/session.php");
                                     </div>
 
                                 </div>
+
+                            
                             </div>
 
                         </div>
+                        
                         <!-- End Customers Card -->
+ <!-- EXPENSES CARD -->
+ <div class="col-xxl-4 col-xl-6">
 
-                        <!-- Reports -->
+<div class="card info-card customers-card">
+
+    <div class="filter">
+        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+            <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+            </li>
+
+
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">DEFECTS <span>| </span></h5>
+
+        <div class="d-flex align-items-center">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class="bi bi-money"></i>
+            </div>
+            <div class="ps-3">
+                <h6> <?php
+                        $selQuery = mysqli_query($con, "SELECT count(*) as amount from defects");
+                        $row = mysqli_fetch_array($selQuery);
+                        $amount = $row['amount'];
+                        echo "$amount";
+                        ?></h6>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</div>
+                        <!-- END EXPENSES CARD -->
 
                         <!-- End Reports -->
 
@@ -197,16 +240,17 @@ include("includes/session.php");
                                     </ul>
                                 </div>
 
-                                <div class="card-body">
+                                <!-- <div class="card-body">
                                     <h5 class="card-title">Savings <span>| Today</span></h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">IdNo</th>
+
                                                 <th scope="col">Names</th>
                                                 <th scope="col">Phone</th>
+                                                <th scope="col">Tin</th>
                                                 <th scope="col">Amount</th>
                                             </tr>
                                         </thead>
@@ -214,32 +258,41 @@ include("includes/session.php");
                                             <?php
 
                                             ## Fetch records
-                                            $empQuery = "select s.pin,s.date,s.id,m.names,m.idcard,m.phone,sum(s.saving) as amount from members m,saving s WHERE m.id=s.pin group by pin";
+                                            /*
+                                            $empQuery = "select s.pin,s.date,s.id,m.names,m.tin,m.phone,sum(s.saving) as amount from members m,saving s WHERE m.id=s.pin group by pin";
                                             $empRecords = mysqli_query($con, $empQuery) or die(mysqli_error($con));
                                             $i = $total = 0;
                                             while ($row = mysqli_fetch_array($empRecords)) {
                                                 $i++;
-                                                $idno = $row['idcard'];
+                                                $idno = $row['tin'];
                                                 $names = $row['names'];
                                                 $phone = $row['phone'];
                                                 $amount = $row['amount'];
                                                 $pin = $row['pin'];
                                                 $total += $amount;
-                                                echo "<tr><td>$i</td><td>$idno</td><td><a href='saving_details.php?pin=$pin' target='_blank'>$names</a></td><td>$phone</td><td>$amount</td></tr>";
+                                                echo "<tr><td>$i</td><td><a href='saving_details.php?pin=$pin' target='_blank'>$names</a></td><td>$phone</td>
+                                                <td>$idno</td>
+                                                <td>$amount</td></tr>";
                                             }
+                                                */
                                             ?>
                                         </tbody>
-                                        <tfoot><tr><th colspan="4">Total</th><th><?php echo "$total";?></th></tr></tfoot>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="4">Total</th>
+                                                <th><?php //echo "$total"; ?></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
 
                                 </div>
 
                             </div>
-                        </div>
+                        </div> -->
                         <!-- End Recent Sales -->
 
                         <!-- Top Selling -->
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                             <div class="card recent-sales overflow-auto">
 
                                 <div class="filter">
@@ -259,9 +312,10 @@ include("includes/session.php");
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">IdNo</th>
+
                                                 <th scope="col">Names</th>
                                                 <th scope="col">Phone</th>
+                                                <th scope="col">Tin</th>
                                                 <th scope="col">Amount</th>
                                                 <th scope="col">Interest</th>
                                                 <th scope="col">Tot to Pay</th>
@@ -273,12 +327,13 @@ include("includes/session.php");
                                             <?php
 
                                             ## Fetch records
-                                            $empQuery = "select s.pin,s.date,s.id,m.names,m.idcard,m.phone,sum(s.amount) as amount,sum(s.interest) as interest,sum(s.total) as total from members m,credits s WHERE m.id=s.pin group by pin";
+                                            /*
+                                            $empQuery = "select s.pin,s.date,s.id,m.names,m.tin,m.phone,sum(s.amount) as amount,sum(s.interest) as interest,sum(s.total) as total from members m,credits s WHERE m.id=s.pin group by pin";
                                             $empRecords = mysqli_query($con, $empQuery) or die(mysqli_error($con));
                                             $i = $total = 0;
                                             while ($row = mysqli_fetch_array($empRecords)) {
                                                 $i++;
-                                                $idno = $row['idcard'];
+                                                $idno = $row['tin'];
                                                 $names = $row['names'];
                                                 $phone = $row['phone'];
                                                 $amount = $row['amount'];
@@ -291,20 +346,28 @@ include("includes/session.php");
                                                 $row1 = mysqli_fetch_array($empRecords1);
                                                 $pam = $row1['ampay'];
                                                 $amLeft = $total - $pam;
-                                                echo "<tr><td>$i</td><td>$idno</td><td><a href='credit_details.php?pin=$pin' target='_blank'>$names</a></td><td>$phone</td><td>$amount</td>
+                                                echo "<tr><td>$i</td><td><a href='credit_details.php?pin=$pin' target='_blank'>$names</a></td><td>$phone</td>
+                                                <td>$idno</td>
+                                                <td>$amount</td>
                                                 <td>$interest</td>
                                                 <td>$total</td>
                                                 <td>$pam</td><td>$amLeft</td></tr>";
                                             }
+                                            */
                                             ?>
                                         </tbody>
-                                        <tfoot><tr><th colspan="4">Total</th><th><?php echo "$total";?></th></tr></tfoot>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="4">Total</th>
+                                                <th><?php // echo "$total"; ?></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
 
                                 </div>
 
                             </div>
-                        </div>
+                        </div> -->
                         <!-- End Top Selling -->
 
                     </div>
